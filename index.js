@@ -2,13 +2,20 @@ const {promisify} = require('util');
 const {join} = require('path');
 const {Transform, Writable} = require('stream');
 const minimist = require('minimist');
+const AWS = require('aws-sdk');
 const Kinesis = require('aws-sdk/clients/kinesis');
 const KinesisReadable = require('kinesis-readable');
+
+const providerChain = new AWS.CredentialProviderChain();
+providerChain.providers.push(() => {
+  return new AWS.Credentials('undefined', 'undefined');
+});
 
 const createKinesisReadables = async ({kinesisEndpoint, kinesisStream}) => {
   const client = new Kinesis({
     apiVersion: '2013-12-02',
-    endpoint: 'http://localhost:4567',
+    credentialProvider: providerChain,
+    endpoint: kinesisEndpoint,
     region: 'eu-west-1',
     params: {StreamName: 'bricklane-central-development'}
   });
