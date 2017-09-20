@@ -1,0 +1,19 @@
+{
+  "name": "@coorpacademy/kinesis-lambda-launcher",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "kinesis-lambda-launcher": "./bin.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.118.0",
+    "kinesis-readable": "^1.1.0",
+    "minimist": "^1.2.0"
+  }
+}
